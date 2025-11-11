@@ -1,0 +1,61 @@
+version: '3.8'
+
+# Docker Compose for Development
+# Includes hot-reload for both backend and frontend
+
+services:
+  # Backend API (Development mode with hot-reload)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: value-investing-backend-dev
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - HOST=0.0.0.0
+      - FRONTEND_URL=http://localhost:3000
+      - PYTHONUNBUFFERED=1
+    volumes:
+      # Mount source code for hot-reload
+      - ./backend:/app
+      - /app/__pycache__
+    command: python main.py
+    networks:
+      - value-investing-network
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Frontend (Development mode with hot-reload)
+  frontend-dev:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: value-investing-frontend-dev
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000/api
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+    volumes:
+      # Mount source code for hot-reload
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - value-investing-network
+    stdin_open: true
+    tty: true
+
+networks:
+  value-investing-network:
+    driver: bridge

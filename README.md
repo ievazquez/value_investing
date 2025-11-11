@@ -121,7 +121,60 @@ value_investing/
 └── README.md                 # Este archivo
 ```
 
-## 🚀 Instalación y Uso
+## 🐳 Instalación con Docker (Recomendado)
+
+La forma más rápida y sencilla de ejecutar la aplicación es usando Docker.
+
+### Requisitos
+- Docker 20.10+
+- Docker Compose 2.0+
+
+### Inicio Rápido
+
+```bash
+# Clonar el repositorio
+git clone <repository-url>
+cd value_investing
+
+# Opción 1: Usando Make (recomendado)
+make build
+make up
+
+# Opción 2: Usando Docker Compose directamente
+docker-compose build
+docker-compose up -d
+```
+
+✅ **¡Listo!** La aplicación estará disponible en:
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:8000
+- API Docs: http://localhost:8000/docs
+
+### Comandos Docker Útiles
+
+```bash
+# Ver logs
+make logs                    # o: docker-compose logs -f
+
+# Detener la aplicación
+make down                    # o: docker-compose down
+
+# Reiniciar servicios
+make restart                 # o: docker-compose restart
+
+# Modo desarrollo con hot-reload
+make dev                     # o: docker-compose -f docker-compose.dev.yml up
+
+# Limpiar todo
+make clean
+```
+
+### Ver documentación completa de Docker
+Consulta [DOCKER.md](./DOCKER.md) para instrucciones detalladas, troubleshooting y configuración avanzada.
+
+---
+
+## 🚀 Instalación Manual (Sin Docker)
 
 ### Requisitos Previos
 - Python 3.8 o superior

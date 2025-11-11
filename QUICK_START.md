@@ -2,7 +2,35 @@
 
 Guía rápida para poner en marcha la aplicación Value Investing Analyzer.
 
-## Inicio Rápido (2 pasos)
+## 🐳 Opción 1: Docker (Recomendado - Más Fácil)
+
+### Un solo comando:
+
+```bash
+# Construir y ejecutar
+docker-compose up --build
+
+# O usando Make
+make build && make up
+```
+
+✅ **¡Listo!** Accede a:
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:8000
+- API Docs: http://localhost:8000/docs
+
+### Comandos útiles:
+
+```bash
+make logs      # Ver logs
+make down      # Detener todo
+make restart   # Reiniciar
+make dev       # Modo desarrollo con hot-reload
+```
+
+---
+
+## 💻 Opción 2: Instalación Manual (Sin Docker)
 
 ### 1️⃣ Backend (Terminal 1)
 
@@ -48,7 +76,40 @@ npm start
 - `WMT` - Walmart (Retail)
 - `BAC` - Bank of America (Finanzas)
 
-## Troubleshooting
+---
+
+## 🐳 Troubleshooting Docker
+
+### Docker no inicia
+```bash
+# Verificar que Docker está corriendo
+docker ps
+
+# Ver logs de errores
+docker-compose logs
+
+# Reconstruir desde cero
+make clean
+make build
+make up
+```
+
+### Puerto ya en uso
+```bash
+# Ver qué usa el puerto
+lsof -i :8000
+lsof -i :3000
+
+# O detener todos los contenedores
+docker-compose down
+```
+
+### Más ayuda con Docker
+Ver [DOCKER.md](./DOCKER.md) para guía completa de Docker.
+
+---
+
+## 💻 Troubleshooting Instalación Manual
 
 ### El backend no inicia
 ```bash
