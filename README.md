@@ -215,7 +215,65 @@ npm start
 
 La aplicación estará disponible en `http://localhost:3000`
 
-## 📚 Uso de la Aplicación
+---
+
+## 💻 Uso desde CLI (Línea de Comandos)
+
+### Análisis Rápido sin Servidor Web
+
+Puedes analizar acciones directamente desde la terminal sin necesidad de ejecutar el servidor web:
+
+```bash
+# Desde el directorio raíz
+./analyze.sh AAPL
+
+# En Windows
+analyze.bat AAPL
+
+# Desde backend
+cd backend
+python cli.py AAPL
+```
+
+### Ejemplos de CLI
+
+```bash
+# Análisis rápido (resumen)
+./analyze.sh AAPL
+
+# Análisis detallado completo
+./analyze.sh AAPL --detailed
+
+# Solo métricas en tabla
+./analyze.sh MSFT --metrics
+
+# Salida en JSON (para scripts)
+./analyze.sh KO --json
+
+# Analizar múltiples acciones
+./analyze.sh AAPL MSFT KO GOOGL
+
+# Buscar acciones
+./analyze.sh --search "coca cola"
+
+# Guardar resultado en archivo
+./analyze.sh AAPL --json > aapl_analysis.json
+```
+
+### Ventajas del CLI
+
+- ⚡ **Más rápido** - No necesitas ejecutar el servidor web
+- 🔄 **Automatizable** - Integra con scripts y cron jobs
+- 📊 **Múltiples formatos** - Summary, detailed, metrics, JSON
+- 🎯 **Monitoreo** - Analiza tu portafolio automáticamente
+- 🐳 **Compatible con Docker** - `docker-compose run --rm backend python cli.py AAPL`
+
+### Ver documentación completa del CLI
+Consulta [CLI.md](./CLI.md) para guía completa, ejemplos avanzados y scripts de automatización.
+
+---
+
+## 📚 Uso de la Aplicación Web
 
 1. **Buscar una acción**: Ingresa el ticker (ej: AAPL, MSFT, KO)
 2. **Espera el análisis**: La app obtiene datos y realiza todos los cálculos

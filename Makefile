@@ -19,6 +19,12 @@ help:
 	@echo "  make dev-down   - Stop development environment"
 	@echo "  make dev-logs   - View development logs"
 	@echo ""
+	@echo "CLI (Command Line Interface):"
+	@echo "  make analyze TICKER=AAPL        - Analyze stock from CLI"
+	@echo "  make analyze-detailed TICKER=AAPL - Detailed analysis from CLI"
+	@echo "  make analyze-json TICKER=AAPL    - JSON output from CLI"
+	@echo "  make search QUERY='apple'        - Search stocks from CLI"
+	@echo ""
 	@echo "Utilities:"
 	@echo "  make clean      - Remove all containers, images, and volumes"
 	@echo "  make test       - Run tests (when available)"
@@ -133,3 +139,33 @@ rebuild:
 	make build
 	make up
 	@echo "✓ Rebuild complete!"
+
+# CLI commands
+analyze:
+	@echo "Analyzing $(TICKER)..."
+	@cd backend && python cli.py $(TICKER)
+
+analyze-detailed:
+	@echo "Detailed analysis of $(TICKER)..."
+	@cd backend && python cli.py $(TICKER) --detailed
+
+analyze-json:
+	@echo "JSON analysis of $(TICKER)..."
+	@cd backend && python cli.py $(TICKER) --json
+
+analyze-metrics:
+	@echo "Metrics for $(TICKER)..."
+	@cd backend && python cli.py $(TICKER) --metrics
+
+search:
+	@echo "Searching for '$(QUERY)'..."
+	@cd backend && python cli.py --search "$(QUERY)"
+
+# CLI with Docker
+analyze-docker:
+	@echo "Analyzing $(TICKER) with Docker..."
+	docker-compose run --rm backend python cli.py $(TICKER)
+
+analyze-docker-detailed:
+	@echo "Detailed analysis of $(TICKER) with Docker..."
+	docker-compose run --rm backend python cli.py $(TICKER) --detailed

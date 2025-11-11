@@ -58,7 +58,58 @@ npm start
 
 ✅ App abierta automáticamente en `http://localhost:3000`
 
-## Primeros Pasos
+---
+
+## 💻 Opción 3: CLI (Línea de Comandos)
+
+**La forma más rápida para analizar acciones sin servidor web:**
+
+```bash
+# Instalar dependencias (solo una vez)
+cd backend
+pip install -r requirements.txt
+
+# Analizar una acción
+cd ..
+./analyze.sh AAPL
+
+# En Windows
+analyze.bat AAPL
+```
+
+### Ejemplos CLI rápidos:
+
+```bash
+# Resumen rápido
+./analyze.sh AAPL
+
+# Análisis detallado
+./analyze.sh AAPL --detailed
+
+# Métricas en tabla
+./analyze.sh MSFT --metrics
+
+# Formato JSON
+./analyze.sh KO --json
+
+# Múltiples acciones
+./analyze.sh AAPL MSFT KO
+
+# Buscar ticker
+./analyze.sh --search "apple"
+```
+
+**Ventajas del CLI:**
+- ⚡ Instantáneo - Sin esperar servidor web
+- 🔄 Scriptable - Automatiza análisis
+- 📊 Múltiples formatos - JSON, tabla, resumen
+- 🐳 Compatible con Docker
+
+Ver [CLI.md](./CLI.md) para más ejemplos y scripts de automatización.
+
+---
+
+## Primeros Pasos (Web App)
 
 1. **Buscar**: Ingresa un ticker (ej: `AAPL`, `MSFT`, `KO`)
 2. **Analizar**: Espera unos segundos mientras se obtienen los datos
